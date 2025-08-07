@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro Facial</title>
+    <meta charset="UTF-8">
+    <script src="https://cdn.faceio.net/fio.js"></script>
+</head>
+<body>
+<h3 id="status">Cargando FaceIO...</h3>
+
+<script>
+    const faceio = new faceIO("fioa98da"); // Reemplazá con tu PUBLIC ID
+
+    window.onload = () => {
+        const status = document.getElementById("status");
+        if (!status) return;
+
+        status.innerText = "Iniciando FaceIO...";
+
+        faceio.enroll({
+            locale: "auto",
+            payload: {
+                email: "ejemplo@email.com",
+                userId: "123456",
+                username: "Usuario Prueba"
+            }
+        }).then(userInfo => {
+            console.log("Usuario registrado:", userInfo);
+            status.innerText = "¡Registro exitoso!";
+        }).catch(err => {
+            console.error("Error al registrar rostro:", err);
+            status.innerText = "Error al registrar rostro: " + err.code;
+        });
+    };
+</script>
+</body>
+</html>
